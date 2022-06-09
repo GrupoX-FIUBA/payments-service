@@ -4,7 +4,7 @@ const routes = require("./routes");
 
 const tracer = require("dd-trace");
 if (process.env.NODE_ENV === "prod") {
-	tracer.init();
+  tracer.init();
 }
 
 // Require the framework and instantiate it
