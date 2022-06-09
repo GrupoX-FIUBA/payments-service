@@ -26,5 +26,5 @@ jobs:
         env:
           HD_DD_API_KEY: ${{ secrets.DD_API_KEY }}
           HD_NODE_ENV: prod
-          INFURA_API_KEY: ${{secrets.INFURA_API_KEY}}
-          MNEMONIC: ${{secrets.MNEMONIC}}
+          HD_INFURA_API_KEY: ${{secrets.INFURA_API_KEY}}
+          HD_MNEMONIC: ${{secrets.MNEMONIC}}
