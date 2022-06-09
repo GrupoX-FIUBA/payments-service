@@ -2,6 +2,11 @@ const config = require("./config");
 const services = require("./services/services")({ config });
 const routes = require("./routes");
 
+const tracer = require("dd-trace");
+if (process.env.NODE_ENV === "prod") {
+	tracer.init();
+}
+
 // Require the framework and instantiate it
 const fastify = require("fastify")({ logger: true });
 
