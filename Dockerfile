@@ -1,15 +1,16 @@
-FROM node:16-alpine
+FROM node:16-slim
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+RUN apt-get update -y
 
-WORKDIR /home/node/app
+RUN apt-get install build-essential -y
 
-COPY --chown=node:node package*.json ./
+RUN apt-get install -y python3
 
-USER node
-
-RUN npm ci
+COPY heroku/start.sh ./
 
 COPY --chown=node:node . .
 
-CMD [ "node", "server.js" ]
+RUN npm ci
+
+# Use app entrypoint
+CMD ["bash", "start.sh"]

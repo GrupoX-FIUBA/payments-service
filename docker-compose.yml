@@ -3,10 +3,10 @@ version: '3'
 services:
   fastify:
     build: .
-    container_name: fastify
+    container_name: payments-service-fastify
     ports:
       - ${PORT:-8000}:${PORT:-8000}
     environment:
       - PORT=${PORT:-8000}
-      - NODE_ENV=${NODE_ENV:-production}
+      - NODE_ENV=${NODE_ENV:-prod}
       - DEBUG
