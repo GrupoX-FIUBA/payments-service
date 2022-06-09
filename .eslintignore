@@ -6,13 +6,13 @@ coverage/
 dist/
 lib/
 node_modules/
+deployments/
 typechain/
 profiles/
 docs/
 .gitlab/
 .vscode/
 src/
-deployments/
 
 # files
 .solcover.js
