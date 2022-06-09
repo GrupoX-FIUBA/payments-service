@@ -1,44 +1,59 @@
-# Template repository for Fastify microservices
+# Payments Service
 
-This is a template to use as a starting point for Fastify (Node.js) microservice repositories. Once configured, it will run the tests on every pull request to `main`, and will automatically deploy to corresponding Heroku app when a push to `main` occurs.
+This microservice manages the transactions and payments related topics.
 
-## To Do after fork/create-from-template
+## Installation
 
-- Go to the repository settings, _Actions secrets_ and create a new _repository secret_ with name `HEROKU_APP_NAME` and the name of the Heroku app in the _value_ field.
-- Open `package.json` and modify the name and description of the project. The name must be lowercase and can't contain special chars except `-` and `_`.
+To install the project we recommend that you use NVM and install the node version defined in `.nvmrc`
 
-There's a very simple example of a Fastify app with tests.
+Once you have that in place, you can install the dependencies with npm through
 
-## Local development
+`npm i`
 
-To run the application there are two options. In either case, you can stablish a `DEBUG=1` environment variable to see the log (_i.e._ `DEBUG=1 npx nodemon app.js`).
+### Start process
 
-### With Node
+To start the process, after you installed the dependencies and deployed the smart contracts to kovan, you can run
 
-- Install the dependencies: `npm install`.
-- Run the app in port 8000 with `npx nodemon server.js` or with `PORT=xxxx npx nodemon server.js` to use a specific `xxxx` port.
+`npm run start`
+
+keep in mind that you should have everything in config set before that.
 
 ### With Docker
 
 Run `docker-compose up` to start the app. Also, you can specify the port with the environment variable: `PORT=xxxx docker-compose up`.
 
-## Tests
+#### Testing
 
-Again, there are two options. Note that the Node option is naturally faster.
+To run the tests, after you installed the dependencies, just run
 
-### With Node
+`npm test`
 
-- Run the tests with `npm test`.
-- Run the linter with `npx eslint . --ext .js,.jsx,.ts,.tsx`
+#### Linting
 
-### With Docker
+To run the linter, after you installed the dependencies, just run
 
-Run the tests and linter with:
+`npm run lint`
 
-```bash
-docker-compose run --rm fastify sh -c "NODE_ENV=development npm install && npm test && npx eslint . --ext .js,.jsx,.ts,.tsx"
-```
+#### Deployment
 
-## Docs
+To deploy the smart contracts just run
+
+`npm run deploy-kovan`
+
+`npm run deploy-local`
+
+depending on the network you want to use.
+
+Keep in mind that you have to set the INFURA_API_KEY and MNEMONIC env vars (the .env file can be used for this).
+
+To get the deployed contract address just look in the `deployments/<network>/BasicPayments.json` file.
+
+#### More scripts
+
+Other useful scripts can be found using
+
+`npm run`
+
+#### Docs
 
 The documentation is generated automatically by Fastify (with Swagger). It's available in the server at `/docs`.
