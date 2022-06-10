@@ -7,7 +7,7 @@ const getDeposit = require("./handlers/getDepositHandler");
 function getWalletDataRoute({ services, config }) {
   return {
     method: "GET",
-    url: "/wallet/:id",
+    url: "/wallet/:user_id",
     schema: getWalletData.schema(config),
     handler: getWalletData.handler({ config, ...services }),
   };

@@ -1,5 +1,7 @@
 function schema() {
   return {
+    description: "Get all wallets information",
+    tags: ["Wallet"],
     params: {},
   };
 }

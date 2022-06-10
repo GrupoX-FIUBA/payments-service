@@ -1,10 +1,12 @@
 function schema() {
   return {
-    params: {
+    description: "Make a deposit",
+    tags: ["Deposit"],
+    body: {
       type: "object",
       properties: {
         senderId: {
-          type: "integer",
+          type: "string",
         },
         amountInEthers: {
           type: "string",
