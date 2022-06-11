@@ -9,6 +9,9 @@
     "hardhat": "2.0.6",
     "hardhat-deploy": "0.7.4",
     "hardhat-deploy-ethers": "0.3.0-beta.7",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.20.1",
     "solc": "0.7.4"
   },
   "devDependencies": {
