@@ -1,6 +1,5 @@
 const ethers = require("ethers");
 const User = require("../models/user").User;
-const accounts = [];
 
 const getDeployerWallet = ({ config }) => () => {
   const provider = new ethers.providers.InfuraProvider(config.network, config.infuraApiKey);
@@ -40,10 +39,24 @@ const getWallet = ({}) => async user_id => {
   return new ethers.Wallet(wallet.dataValues.privateKey, provider);
 };
 
+const getWalletBalance = () => async user_id => {
+  const provider = new ethers.providers.InfuraProvider("kovan", process.env.INFURA_API_KEY);
+  const wallet = await User.findByPk(user_id);
+
+  const balance = provider.getBalance(wallet.dataValues.publicKey).then(balance => {
+    // Convert a currency unit from wei to ether
+    const balanceInEth = ethers.utils.formatEther(balance);
+    return balanceInEth;
+  });
+
+  return balance;
+};
+
 module.exports = ({ config }) => ({
   createWallet: createWallet({ config }),
   getDeployerWallet: getDeployerWallet({ config }),
   getWalletsData: getWalletsData({ config }),
   getWalletData: getWalletData({ config }),
   getWallet: getWallet({ config }),
+  getWalletBalance: getWalletBalance({ config }),
 });
