@@ -28,3 +28,4 @@ jobs:
           HD_NODE_ENV: prod
           HD_INFURA_API_KEY: ${{secrets.INFURA_API_KEY}}
           HD_MNEMONIC: ${{secrets.MNEMONIC}}
+          HD_PAYMENTS_SERVICE_API_KEY: ${{ secrets.PAYMENTS_SERVICE_API_KEY }}
