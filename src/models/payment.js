@@ -1,29 +1,28 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../db/db");
 
-const User = sequelize.define(
-  "user",
+const Payment = sequelize.define(
+  "payment",
   {
-    id: {
-      type: DataTypes.STRING,
-      primaryKey: true,
-      allowNull: false,
-    },
-    publicKey: {
+    user_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    privateKey: {
+    amount: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+    },
+    txHash: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     // Other model options go here
-    timestamps: false,
+    updatedAt: false,
   },
 );
 
 module.exports = {
-  User: User,
+  Payment: Payment,
 };

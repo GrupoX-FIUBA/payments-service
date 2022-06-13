@@ -2,9 +2,13 @@ const getWalletData = require("./handlers/getWalletHandler");
 const getWalletsData = require("./handlers/getWalletsHandler");
 const createWallet = require("./handlers/createWalletHandler");
 const createDeposit = require("./handlers/createDepositHandler");
-const getDeposit = require("./handlers/getDepositHandler");
 const createPayment = require("./handlers/createPaymentHandler");
 const getBalance = require("./handlers/getWalletBalanceHandler");
+const getDepositsData = require("./handlers/getDepositsHandler");
+const getUserDepositsData = require("./handlers/getUserDepositsHandler");
+const getPaymentsData = require("./handlers/getPaymentsHandler");
+const getUserPaymentsData = require("./handlers/getUserPaymentsHandler");
+const deleteWallet = require("./handlers/deleteWalletHandler");
 
 function getWalletDataRoute({ services, config }) {
   return {
@@ -24,7 +28,7 @@ function getWalletsDataRoute({ services, config }) {
   };
 }
 
-function getWalletBalance({ services, config }) {
+function getWalletBalanceRoute({ services, config }) {
   return {
     method: "GET",
     url: "/balance/:user_id",
@@ -60,12 +64,48 @@ function createPaymentRoute({ services, config }) {
   };
 }
 
-function getDepositRoute({ services, config }) {
+function getDepositsDataRoute({ services, config }) {
   return {
     method: "GET",
-    url: "/deposit/:txHash",
-    schema: getDeposit.schema(config),
-    handler: getDeposit.handler({ config, ...services }),
+    url: "/deposit",
+    schema: getDepositsData.schema(config),
+    handler: getDepositsData.handler({ config, ...services }),
+  };
+}
+
+function getUserDepositsDataRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/deposit/:user_id",
+    schema: getUserDepositsData.schema(config),
+    handler: getUserDepositsData.handler({ config, ...services }),
+  };
+}
+
+function getPaymentsDataRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/payment",
+    schema: getPaymentsData.schema(config),
+    handler: getPaymentsData.handler({ config, ...services }),
+  };
+}
+
+function getUserPaymentsDataRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/payment/:user_id",
+    schema: getUserPaymentsData.schema(config),
+    handler: getUserPaymentsData.handler({ config, ...services }),
+  };
+}
+
+function deleteWalletRoute({ services, config }) {
+  return {
+    method: "DELETE",
+    url: "/wallet/:user_id",
+    schema: deleteWallet.schema(config),
+    handler: deleteWallet.handler({ config, ...services }),
   };
 }
 
@@ -74,7 +114,11 @@ module.exports = [
   getWalletsDataRoute,
   createWalletRoute,
   createDepositRoute,
-  getDepositRoute,
   createPaymentRoute,
-  getWalletBalance,
+  getWalletBalanceRoute,
+  getDepositsDataRoute,
+  getUserDepositsDataRoute,
+  getPaymentsDataRoute,
+  getUserPaymentsDataRoute,
+  deleteWalletRoute,
 ];

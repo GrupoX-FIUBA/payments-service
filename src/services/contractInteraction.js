@@ -1,12 +1,8 @@
 const ethers = require("ethers");
-const getDepositHandler = require("../handlers/getDepositHandler");
 
 const getContract = (config, wallet) => {
   return new ethers.Contract(config.contractAddress, config.contractAbi, wallet);
 };
-
-const deposits = {};
-const payments = {};
 
 const deposit = ({ config }) => async (senderWallet, amountToSend) => {
   const basicPayments = await getContract(config, senderWallet);
@@ -19,10 +15,7 @@ const deposit = ({ config }) => async (senderWallet, amountToSend) => {
       const firstEvent = receipt && receipt.events && receipt.events[0];
       console.log(firstEvent);
       if (firstEvent && firstEvent.event == "DepositMade") {
-        deposits[tx.hash] = {
-          senderAddress: firstEvent.args.sender,
-          amountSent: firstEvent.args.amount,
-        };
+        // Antes se "guardaba en la DB"
       } else {
         console.error(`Payment not created in tx ${tx.hash}`);
       }
@@ -52,10 +45,7 @@ const sendPayment = ({ config }) => async (scOwnerWallet, receiverWallet, amount
       const firstEvent = receipt && receipt.events && receipt.events[0];
       console.log(firstEvent);
       if (firstEvent && firstEvent.event == "PaymentMade") {
-        deposits[tx.hash] = {
-          senderAddress: firstEvent.args.sender,
-          amountSent: firstEvent.args.amount,
-        };
+        // Antes se "guardaba en la DB"
       } else {
         console.error(`Payment not created in tx ${tx.hash}`);
       }
@@ -73,12 +63,7 @@ const sendPayment = ({ config }) => async (scOwnerWallet, receiverWallet, amount
   return tx;
 };
 
-const getDepositReceipt = ({}) => async depositTxHash => {
-  return deposits[depositTxHash];
-};
-
 module.exports = dependencies => ({
   deposit: deposit(dependencies),
   sendPayment: sendPayment(dependencies),
-  getDepositReceipt: getDepositReceipt(dependencies),
 });

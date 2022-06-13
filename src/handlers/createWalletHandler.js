@@ -1,5 +1,3 @@
-const { ConsoleLogger } = require("ts-generator/dist/logger");
-
 function schema() {
   return {
     description: "Create a new wallet",
