@@ -1,15 +1,18 @@
 const config = require("./config");
 const services = require("./services/services")({ config });
 const routes = require("./routes");
+const auth = require("./handlers/authHandlers");
 const db = require("./db/db");
 
 // Require the framework and instantiate it
 const fastify = require("fastify")({ logger: true });
 
+fastify.addHook("preHandler", auth.userAuthentication);
+
 fastify.register(require("fastify-swagger"), {
   routePrefix: "/docs",
   exposeRoute: true,
-  swagger: {
+  openapi: {
     info: {
       title: "Payments Service",
       description: "Payments service API Documentation",
@@ -20,6 +23,22 @@ fastify.register(require("fastify-swagger"), {
       url: "https://github.com/GrupoX-FIUBA/payments-service",
       description: "Find more info here",
     },
+
+    components: {
+      securitySchemes: {
+        APIKeyHeader: {
+          type: "apiKey",
+          name: "X-API-Key",
+          in: "header",
+        },
+      },
+    },
+
+    security: [
+      {
+        APIKeyHeader: [],
+      },
+    ],
   },
 });
 
