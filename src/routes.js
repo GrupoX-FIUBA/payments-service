@@ -17,6 +17,10 @@ const createExtraction = require("./handlers/extractions/createExtractionHandler
 const getExtractionsData = require("./handlers/extractions/getExtractionsHandler");
 const getUserExtractionsData = require("./handlers/extractions/getUserExtractionsHandler");
 
+const createDonation = require("./handlers/donations/createDonationHandler");
+const getDonationsData = require("./handlers/donations/getDonationsHandler");
+const getUserDonationsData = require("./handlers/donations/getUserDonationsHandler");
+
 function getWalletDataRoute({ services, config }) {
   return {
     method: "GET",
@@ -119,7 +123,7 @@ function deleteWalletRoute({ services, config }) {
 function createExtractionRoute({ services, config }) {
   return {
     method: "POST",
-    url: "/extraction/:user_id",
+    url: "/extraction",
     schema: createExtraction.schema(config),
     handler: createExtraction.handler({ config, ...services }),
   };
@@ -143,19 +147,49 @@ function getUserExtractionsDataRoute({ services, config }) {
   };
 }
 
+function createDonationRoute({ services, config }) {
+  return {
+    method: "POST",
+    url: "/donation",
+    schema: createDonation.schema(config),
+    handler: createDonation.handler({ config, ...services }),
+  };
+}
+
+function getDonationsDataRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/donation",
+    schema: getDonationsData.schema(config),
+    handler: getDonationsData.handler({ config, ...services }),
+  };
+}
+
+function getUserDonationsDataRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/donation/:user_id",
+    schema: getUserDonationsData.schema(config),
+    handler: getUserDonationsData.handler({ config, ...services }),
+  };
+}
+
 module.exports = [
   getWalletDataRoute,
   getWalletsDataRoute,
   createWalletRoute,
+  deleteWalletRoute,
+  getWalletBalanceRoute,
   createDepositRoute,
   createPaymentRoute,
-  getWalletBalanceRoute,
   getDepositsDataRoute,
   getUserDepositsDataRoute,
   getPaymentsDataRoute,
   getUserPaymentsDataRoute,
-  deleteWalletRoute,
   createExtractionRoute,
   getExtractionsDataRoute,
   getUserExtractionsDataRoute,
+  createDonationRoute,
+  getDonationsDataRoute,
+  getUserDonationsDataRoute,
 ];

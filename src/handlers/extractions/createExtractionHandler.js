@@ -4,17 +4,12 @@ function schema() {
   return {
     description: "Make an extraction",
     tags: ["Extraction"],
-    params: {
+    body: {
       type: "object",
       properties: {
         user_id: {
           type: "string",
         },
-      },
-    },
-    body: {
-      type: "object",
-      properties: {
         destAddress: {
           type: "string",
         },
@@ -29,12 +24,12 @@ function schema() {
 
 function handler({ walletService }) {
   return async function (req, reply) {
-    const srcWallet = await walletService.getWallet(req.params.user_id);
+    const srcWallet = await walletService.getWallet(req.body.user_id);
     const receipt = await walletService.transferToAddress(srcWallet, req.body.amountInEthers, req.body.destAddress);
 
     // Save in DB
     await Extraction.create({
-      user_id: req.params.user_id,
+      user_id: req.body.user_id,
       txHash: receipt.hash,
       amount: req.body.amountInEthers,
       destAddress: req.body.destAddress,
