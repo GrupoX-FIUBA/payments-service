@@ -33,8 +33,18 @@ Wallet.hasMany(Deposit, {
     name: "user_id",
   },
 });
+Deposit.belongsTo(Wallet, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
 
 Wallet.hasMany(Payment, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
+Payment.belongsTo(Wallet, {
   foreignKey: {
     name: "user_id",
   },
@@ -45,8 +55,18 @@ Wallet.hasMany(Extraction, {
     name: "user_id",
   },
 });
+Extraction.belongsTo(Wallet, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
 
 Wallet.hasMany(Donation, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
+Donation.belongsTo(Wallet, {
   foreignKey: {
     name: "user_id",
   },
