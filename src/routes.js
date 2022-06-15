@@ -1,21 +1,21 @@
-const createWallet = require("./handlers/createWalletHandler");
-const getWalletData = require("./handlers/getWalletHandler");
-const getWalletsData = require("./handlers/getWalletsHandler");
-const deleteWallet = require("./handlers/deleteWalletHandler");
+const createWallet = require("./handlers/wallet/createWalletHandler");
+const getWalletData = require("./handlers/wallet/getWalletHandler");
+const getWalletsData = require("./handlers/wallet/getWalletsHandler");
+const deleteWallet = require("./handlers/wallet/deleteWalletHandler");
 
-const createDeposit = require("./handlers/createDepositHandler");
-const getDepositsData = require("./handlers/getDepositsHandler");
-const getUserDepositsData = require("./handlers/getUserDepositsHandler");
+const createDeposit = require("./handlers/deposits/createDepositHandler");
+const getDepositsData = require("./handlers/deposits/getDepositsHandler");
+const getUserDepositsData = require("./handlers/deposits/getUserDepositsHandler");
 
-const getBalance = require("./handlers/getWalletBalanceHandler");
+const getBalance = require("./handlers/wallet/getWalletBalanceHandler");
 
-const createPayment = require("./handlers/createPaymentHandler");
-const getPaymentsData = require("./handlers/getPaymentsHandler");
-const getUserPaymentsData = require("./handlers/getUserPaymentsHandler");
+const createPayment = require("./handlers/payments/createPaymentHandler");
+const getPaymentsData = require("./handlers/payments/getPaymentsHandler");
+const getUserPaymentsData = require("./handlers/payments/getUserPaymentsHandler");
 
-const createExtraction = require("./handlers/createExtractionHandler");
-const getExtractionsData = require("./handlers/getExtractionsHandler");
-const getUserExtractionsData = require("./handlers/getUserExtractionsHandler");
+const createExtraction = require("./handlers/extractions/createExtractionHandler");
+const getExtractionsData = require("./handlers/extractions/getExtractionsHandler");
+const getUserExtractionsData = require("./handlers/extractions/getUserExtractionsHandler");
 
 function getWalletDataRoute({ services, config }) {
   return {

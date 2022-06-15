@@ -1,9 +1,17 @@
-const Wallet = require("../models/wallet").Wallet;
+const Payment = require("../../models/payment").Payment;
 
 function schema() {
   return {
-    description: "Get all wallets information",
-    tags: ["Wallet"],
+    description: "Get all user payments information",
+    tags: ["Payment"],
+    params: {
+      type: "object",
+      properties: {
+        user_id: {
+          type: "string",
+        },
+      },
+    },
     query: {
       type: "object",
       properties: {
@@ -22,7 +30,10 @@ function schema() {
 
 function handler({ walletService }) {
   return async function (req, reply) {
-    const { count, rows } = await Wallet.findAndCountAll({
+    const { count, rows } = await Payment.findAndCountAll({
+      where: {
+        user_id: req.params.user_id,
+      },
       offset: req.query.offset,
       limit: req.query.limit,
     });

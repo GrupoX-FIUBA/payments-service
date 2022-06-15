@@ -1,9 +1,9 @@
-const Deposit = require("../models/deposit").Deposit;
+const Extraction = require("../../models/extraction").Extraction;
 
 function schema() {
   return {
-    description: "Get all user deposits information",
-    tags: ["Deposit"],
+    description: "Get all user extractions information",
+    tags: ["Extraction"],
     params: {
       type: "object",
       properties: {
@@ -30,7 +30,7 @@ function schema() {
 
 function handler({ walletService }) {
   return async function (req, reply) {
-    const { count, rows } = await Deposit.findAndCountAll({
+    const { count, rows } = await Extraction.findAndCountAll({
       where: {
         user_id: req.params.user_id,
       },

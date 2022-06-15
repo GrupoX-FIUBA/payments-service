@@ -1,17 +1,9 @@
-const Extraction = require("../models/extraction").Extraction;
+const Extraction = require("../../models/extraction").Extraction;
 
 function schema() {
   return {
-    description: "Get all user extractions information",
+    description: "Get all extractions information",
     tags: ["Extraction"],
-    params: {
-      type: "object",
-      properties: {
-        user_id: {
-          type: "string",
-        },
-      },
-    },
     query: {
       type: "object",
       properties: {
@@ -31,9 +23,6 @@ function schema() {
 function handler({ walletService }) {
   return async function (req, reply) {
     const { count, rows } = await Extraction.findAndCountAll({
-      where: {
-        user_id: req.params.user_id,
-      },
       offset: req.query.offset,
       limit: req.query.limit,
     });

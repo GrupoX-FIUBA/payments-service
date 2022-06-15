@@ -1,9 +1,17 @@
-const Deposit = require("../models/deposit").Deposit;
+const Deposit = require("../../models/deposit").Deposit;
 
 function schema() {
   return {
-    description: "Get all deposits information",
+    description: "Get all user deposits information",
     tags: ["Deposit"],
+    params: {
+      type: "object",
+      properties: {
+        user_id: {
+          type: "string",
+        },
+      },
+    },
     query: {
       type: "object",
       properties: {
@@ -23,6 +31,9 @@ function schema() {
 function handler({ walletService }) {
   return async function (req, reply) {
     const { count, rows } = await Deposit.findAndCountAll({
+      where: {
+        user_id: req.params.user_id,
+      },
       offset: req.query.offset,
       limit: req.query.limit,
     });

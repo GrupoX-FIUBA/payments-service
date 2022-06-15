@@ -1,4 +1,4 @@
-const Extraction = require("../models/extraction").Extraction;
+const Extraction = require("../../models/extraction").Extraction;
 
 function schema() {
   return {

@@ -1,4 +1,4 @@
-const Wallet = require("../models/wallet").Wallet;
+const Wallet = require("../../models/wallet").Wallet;
 
 function schema() {
   return {

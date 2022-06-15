@@ -1,9 +1,9 @@
-const Extraction = require("../models/extraction").Extraction;
+const Payment = require("../../models/payment").Payment;
 
 function schema() {
   return {
-    description: "Get all extractions information",
-    tags: ["Extraction"],
+    description: "Get all payments information",
+    tags: ["Payment"],
     query: {
       type: "object",
       properties: {
@@ -22,7 +22,7 @@ function schema() {
 
 function handler({ walletService }) {
   return async function (req, reply) {
-    const { count, rows } = await Extraction.findAndCountAll({
+    const { count, rows } = await Payment.findAndCountAll({
       offset: req.query.offset,
       limit: req.query.limit,
     });

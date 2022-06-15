@@ -1,13 +1,13 @@
-const Deposit = require("../models/deposit").Deposit;
+const Payment = require("../../models/payment").Payment;
 
 function schema() {
   return {
-    description: "Make a deposit",
-    tags: ["Deposit"],
+    description: "Make a payment",
+    tags: ["Payment"],
     body: {
       type: "object",
       properties: {
-        senderId: {
+        receiverId: {
           type: "string",
         },
         amountInEthers: {
@@ -15,20 +15,21 @@ function schema() {
         },
       },
     },
-    required: ["senderId", "amountInEthers"],
+    required: ["receiverId", "amountInEthers"],
   };
 }
 
 function handler({ contractInteraction, walletService }) {
   return async function (req) {
-    const receipt = await contractInteraction.deposit(
-      await walletService.getWallet(req.body.senderId),
+    const receipt = await contractInteraction.sendPayment(
+      await walletService.getDeployerWallet(),
+      await walletService.getWallet(req.body.receiverId),
       req.body.amountInEthers,
     );
 
     // Save in DB
-    await Deposit.create({
-      user_id: req.body.senderId,
+    await Payment.create({
+      user_id: req.body.receiverId,
       txHash: receipt.hash,
       amount: req.body.amountInEthers,
     });
