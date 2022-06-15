@@ -1,14 +1,21 @@
+const createWallet = require("./handlers/createWalletHandler");
 const getWalletData = require("./handlers/getWalletHandler");
 const getWalletsData = require("./handlers/getWalletsHandler");
-const createWallet = require("./handlers/createWalletHandler");
+const deleteWallet = require("./handlers/deleteWalletHandler");
+
 const createDeposit = require("./handlers/createDepositHandler");
-const createPayment = require("./handlers/createPaymentHandler");
-const getBalance = require("./handlers/getWalletBalanceHandler");
 const getDepositsData = require("./handlers/getDepositsHandler");
 const getUserDepositsData = require("./handlers/getUserDepositsHandler");
+
+const getBalance = require("./handlers/getWalletBalanceHandler");
+
+const createPayment = require("./handlers/createPaymentHandler");
 const getPaymentsData = require("./handlers/getPaymentsHandler");
 const getUserPaymentsData = require("./handlers/getUserPaymentsHandler");
-const deleteWallet = require("./handlers/deleteWalletHandler");
+
+const createExtraction = require("./handlers/createExtractionHandler");
+const getExtractionsData = require("./handlers/getExtractionsHandler");
+const getUserExtractionsData = require("./handlers/getUserExtractionsHandler");
 
 function getWalletDataRoute({ services, config }) {
   return {
@@ -109,6 +116,33 @@ function deleteWalletRoute({ services, config }) {
   };
 }
 
+function createExtractionRoute({ services, config }) {
+  return {
+    method: "POST",
+    url: "/extraction/:user_id",
+    schema: createExtraction.schema(config),
+    handler: createExtraction.handler({ config, ...services }),
+  };
+}
+
+function getExtractionsDataRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/extraction",
+    schema: getExtractionsData.schema(config),
+    handler: getExtractionsData.handler({ config, ...services }),
+  };
+}
+
+function getUserExtractionsDataRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/extraction/:user_id",
+    schema: getUserExtractionsData.schema(config),
+    handler: getUserExtractionsData.handler({ config, ...services }),
+  };
+}
+
 module.exports = [
   getWalletDataRoute,
   getWalletsDataRoute,
@@ -121,4 +155,7 @@ module.exports = [
   getPaymentsDataRoute,
   getUserPaymentsDataRoute,
   deleteWalletRoute,
+  createExtractionRoute,
+  getExtractionsDataRoute,
+  getUserExtractionsDataRoute,
 ];

@@ -48,10 +48,22 @@ const getWalletBalance = () => async user_id => {
   return balance;
 };
 
+const transferToAddress = () => async (wallet, amount, destAddress) => {
+  let tx = {
+    to: destAddress,
+    // Convert currency unit from ether to wei
+    value: ethers.utils.parseEther(amount),
+  };
+
+  // Send a transaction
+  return wallet.sendTransaction(tx);
+};
+
 module.exports = ({ config }) => ({
   createWallet: createWallet({ config }),
   getDeployerWallet: getDeployerWallet({ config }),
   getWalletData: getWalletData({ config }),
   getWallet: getWallet({ config }),
   getWalletBalance: getWalletBalance({ config }),
+  transferToAddress: transferToAddress({ config }),
 });

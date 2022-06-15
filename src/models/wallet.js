@@ -2,6 +2,8 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../db/db");
 const { Deposit } = require("./deposit");
 const { Payment } = require("./payment");
+const { Extraction } = require("./extraction");
+const { Donation } = require("./donation");
 
 const Wallet = sequelize.define(
   "wallet",
@@ -33,6 +35,18 @@ Wallet.hasMany(Deposit, {
 });
 
 Wallet.hasMany(Payment, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
+
+Wallet.hasMany(Extraction, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
+
+Wallet.hasMany(Donation, {
   foreignKey: {
     name: "user_id",
   },
