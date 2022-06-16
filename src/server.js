@@ -4,6 +4,11 @@ const routes = require("./routes");
 const auth = require("./handlers/authHandlers");
 const db = require("./db/db");
 
+const tracer = require("dd-trace");
+if (process.env.NODE_ENV === "prod") {
+  tracer.init();
+}
+
 // Require the framework and instantiate it
 const fastify = require("fastify")({ logger: true });
 
