@@ -26,7 +26,6 @@ function handler({ walletService }) {
       });
 
       rows.forEach(wallet => {
-        console.log(wallet.dataValues);
         wallet.update({
           subscription: "None",
           expiration: null,
