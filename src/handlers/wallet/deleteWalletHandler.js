@@ -28,6 +28,10 @@ function handler({ walletService }) {
       });
     });
 
+    if (deletedWallet === null) {
+      reply.code(404).send({ detail: "Wallet not found" });
+    }
+
     return deletedWallet;
   };
 }
