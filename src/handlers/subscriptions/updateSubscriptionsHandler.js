@@ -1,5 +1,11 @@
 const Wallet = require("../../models/wallet").Wallet;
-const { Sequelize, Op } = require("sequelize");
+const { Op } = require("sequelize");
+const axios = require("axios").create();
+
+const USERS_SERVICE_URL_HEROKU = "https://spotifiuby-users-service.herokuapp.com/";
+const USERS_SERVICE_URL = USERS_SERVICE_URL_HEROKU;
+
+const USER_PREFIX = "user/";
 const PAGE_SIZE = 100;
 
 function schema() {
@@ -29,6 +35,14 @@ function handler({ walletService }) {
         wallet.update({
           subscription: "None",
           expiration: null,
+        });
+
+        var path = USERS_SERVICE_URL + USER_PREFIX + wallet.user_id + "/subscription_status/";
+
+        axios.patch(path, null, {
+          params: {
+            subscription: "None",
+          },
         });
       });
 

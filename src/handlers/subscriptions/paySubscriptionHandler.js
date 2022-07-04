@@ -1,7 +1,12 @@
 const Wallet = require("../../models/wallet").Wallet;
 const Deposit = require("../../models/deposit").Deposit;
-
 const prices = require("../../config").prices;
+const axios = require("axios").create();
+
+const USERS_SERVICE_URL_HEROKU = "https://spotifiuby-users-service.herokuapp.com/";
+const USERS_SERVICE_URL = USERS_SERVICE_URL_HEROKU;
+
+const USER_PREFIX = "user/";
 
 function schema() {
   return {
@@ -26,6 +31,10 @@ function handler({ contractInteraction, walletService }) {
   return async function (req, reply) {
     const wallet = await Wallet.findByPk(req.body.user_id);
 
+    if (!(req.body.subscription in prices)) {
+      return reply.code(400).send({ msg: "invalid subscription" });
+    }
+
     const receipt = await contractInteraction.deposit(
       await walletService.getWallet(req.body.user_id),
       prices[req.body.subscription].toString(),
@@ -45,6 +54,14 @@ function handler({ contractInteraction, walletService }) {
     var retVal = await wallet.update({
       subscription: req.body.subscription,
       expiration: expDate,
+    });
+
+    const path = USERS_SERVICE_URL + USER_PREFIX + req.body.user_id + "/subscription_status/";
+
+    await axios.patch(path, null, {
+      params: {
+        subscription: req.body.subscription,
+      },
     });
 
     return reply.code(200).send(retVal);
