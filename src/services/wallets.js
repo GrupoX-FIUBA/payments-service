@@ -17,6 +17,7 @@ const createWallet = () => async user_id => {
     user_id: user_id,
     publicKey: wallet.address,
     privateKey: wallet.privateKey,
+    subscription: "None",
   };
 
   const dbWallet = await Wallet.create(newWallet);

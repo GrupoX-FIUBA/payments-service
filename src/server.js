@@ -14,7 +14,7 @@ const fastify = require("fastify")({ logger: true });
 
 fastify.addHook("preHandler", auth.userAuthentication);
 
-fastify.register(require("fastify-swagger"), {
+fastify.register(require("@fastify/swagger"), {
   routePrefix: "/docs",
   exposeRoute: true,
   openapi: {

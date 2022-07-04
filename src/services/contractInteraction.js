@@ -14,9 +14,7 @@ const deposit = ({ config }) => async (senderWallet, amountToSend) => {
       console.log("Transaction mined");
       const firstEvent = receipt && receipt.events && receipt.events[0];
       console.log(firstEvent);
-      if (firstEvent && firstEvent.event == "DepositMade") {
-        // Antes se "guardaba en la DB"
-      } else {
+      if (!(firstEvent && firstEvent.event == "DepositMade")) {
         console.error(`Payment not created in tx ${tx.hash}`);
       }
     },
@@ -44,9 +42,7 @@ const sendPayment = ({ config }) => async (scOwnerWallet, receiverWallet, amount
       console.log("Transaction mined");
       const firstEvent = receipt && receipt.events && receipt.events[0];
       console.log(firstEvent);
-      if (firstEvent && firstEvent.event == "PaymentMade") {
-        // Antes se "guardaba en la DB"
-      } else {
+      if (!(firstEvent && firstEvent.event == "PaymentMade")) {
         console.error(`Payment not created in tx ${tx.hash}`);
       }
     },

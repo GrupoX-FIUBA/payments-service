@@ -21,6 +21,10 @@ const createDonation = require("./handlers/donations/createDonationHandler");
 const getDonationsData = require("./handlers/donations/getDonationsHandler");
 const getUserDonationsData = require("./handlers/donations/getUserDonationsHandler");
 
+const updateSubscriptions = require("./handlers/subscriptions/updateSubscriptionsHandler");
+const paySubscriptions = require("./handlers/subscriptions/paySubscriptionHandler");
+const getSubscriptionsPrices = require("./handlers/subscriptions/getSubscriptionsPrices");
+
 function getWalletDataRoute({ services, config }) {
   return {
     method: "GET",
@@ -174,6 +178,33 @@ function getUserDonationsDataRoute({ services, config }) {
   };
 }
 
+function updateSubscriptionsRoute({ services, config }) {
+  return {
+    method: "PATCH",
+    url: "/subscriptions",
+    schema: updateSubscriptions.schema(config),
+    handler: updateSubscriptions.handler({ config, ...services }),
+  };
+}
+
+function paySubscriptionsRoute({ services, config }) {
+  return {
+    method: "POST",
+    url: "/subscriptions",
+    schema: paySubscriptions.schema(config),
+    handler: paySubscriptions.handler({ config, ...services }),
+  };
+}
+
+function getSubscriptionsPricesRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/subscriptions",
+    schema: getSubscriptionsPrices.schema(config),
+    handler: getSubscriptionsPrices.handler({ config, ...services }),
+  };
+}
+
 module.exports = [
   getWalletDataRoute,
   getWalletsDataRoute,
@@ -192,4 +223,7 @@ module.exports = [
   createDonationRoute,
   getDonationsDataRoute,
   getUserDonationsDataRoute,
+  updateSubscriptionsRoute,
+  paySubscriptionsRoute,
+  getSubscriptionsPricesRoute,
 ];

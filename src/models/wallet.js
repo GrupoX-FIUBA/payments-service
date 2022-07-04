@@ -21,6 +21,14 @@ const Wallet = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    subscription: {
+      type: DataTypes.STRING,
+      allownull: true,
+    },
+    expiration: {
+      type: DataTypes.DATEONLY,
+      allownull: true,
+    },
   },
   {
     // Other model options go here
