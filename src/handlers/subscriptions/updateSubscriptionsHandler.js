@@ -11,12 +11,14 @@ function schema() {
 
 function handler({ walletService }) {
   return async function (req, reply) {
+    var today = new Date();
     var i = 0;
+
     do {
       var { count, rows } = await Wallet.findAndCountAll({
         where: {
-          user_id: {
-            [Op.substring]: "eze",
+          expiration: {
+            [Op.lte]: today,
           },
         },
         offset: i * PAGE_SIZE,
@@ -24,7 +26,11 @@ function handler({ walletService }) {
       });
 
       rows.forEach(wallet => {
-        console.log(wallet.user_id);
+        console.log(wallet.dataValues);
+        wallet.update({
+          subscription: "None",
+          expiration: null,
+        });
       });
 
       i++;
