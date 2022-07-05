@@ -2,7 +2,7 @@ const Wallet = require("../../models/wallet").Wallet;
 const { Op } = require("sequelize");
 const axios = require("axios").create();
 
-const USERS_SERVICE_URL_HEROKU = "https://spotifiuby-users-service.herokuapp.com/";
+const USERS_SERVICE_URL_HEROKU = process.env.USERS_SERVICE_URL;
 const USERS_SERVICE_URL = USERS_SERVICE_URL_HEROKU;
 
 const USER_PREFIX = "user/";

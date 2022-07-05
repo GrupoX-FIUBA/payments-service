@@ -52,6 +52,7 @@ jobs:
           APP_NAME: ${{ secrets.APP_NAME }}
           IMAGE_TAG: ${{ github.sha }}
           API_KEY: ${{ secrets.PAYMENTS_SERVICE_API_KEY }}
+          USERS_SERVICE_URL: ${{ secrets.USERS_SERVICE_URL }}
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
           MNEMONIC: ${{ secrets.MNEMONIC }}
