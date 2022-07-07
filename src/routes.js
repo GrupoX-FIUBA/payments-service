@@ -25,6 +25,9 @@ const updateSubscriptions = require("./handlers/subscriptions/updateSubscription
 const paySubscriptions = require("./handlers/subscriptions/paySubscriptionHandler");
 const getSubscriptionsPrices = require("./handlers/subscriptions/getSubscriptionsPrices");
 
+const getDepositsAmount = require("./handlers/metrics/depositsAmountHandler");
+const getPaymentsAmount = require("./handlers/metrics/paymentsAmountHandler");
+
 function getWalletDataRoute({ services, config }) {
   return {
     method: "GET",
@@ -205,6 +208,24 @@ function getSubscriptionsPricesRoute({ services, config }) {
   };
 }
 
+function getDepositsAmountRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/metrics/deposits",
+    schema: getDepositsAmount.schema(config),
+    handler: getDepositsAmount.handler({ config, ...services }),
+  };
+}
+
+function getPaymentsAmountRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/metrics/payments",
+    schema: getPaymentsAmount.schema(config),
+    handler: getPaymentsAmount.handler({ config, ...services }),
+  };
+}
+
 module.exports = [
   getWalletDataRoute,
   getWalletsDataRoute,
@@ -226,4 +247,6 @@ module.exports = [
   updateSubscriptionsRoute,
   paySubscriptionsRoute,
   getSubscriptionsPricesRoute,
+  getDepositsAmountRoute,
+  getPaymentsAmountRoute,
 ];
