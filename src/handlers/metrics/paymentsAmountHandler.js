@@ -40,13 +40,13 @@ function handler({}) {
         });
 
         rows.forEach(payment => {
-            amountSum += payment.amount;
+          amountSum += payment.amount;
         });
 
         j++;
       } while (count - j * PAGE_SIZE > 0);
 
-      info[selectedDayMin.toISOString().split('T')[0]] = {count: count, amount: amountSum}
+      info[selectedDayMin.toISOString().split("T")[0]] = { count: count, amount: amountSum };
     }
 
     return reply.code(200).send(info);
