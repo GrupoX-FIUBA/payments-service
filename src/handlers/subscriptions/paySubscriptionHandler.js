@@ -3,7 +3,7 @@ const Deposit = require("../../models/deposit").Deposit;
 const prices = require("../../config").prices;
 const axios = require("axios").create();
 
-const USERS_SERVICE_URL_HEROKU = "https://spotifiuby-users-service.herokuapp.com/";
+const USERS_SERVICE_URL_HEROKU = process.env.USERS_SERVICE_URL;
 const USERS_SERVICE_URL = USERS_SERVICE_URL_HEROKU;
 
 const USER_PREFIX = "user/";
