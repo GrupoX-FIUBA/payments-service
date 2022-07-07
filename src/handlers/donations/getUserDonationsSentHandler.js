@@ -2,7 +2,7 @@ const Donation = require("../../models/donation").Donation;
 
 function schema() {
   return {
-    description: "Get all user donations information",
+    description: "Get all user sent donations information",
     tags: ["Donation"],
     params: {
       type: "object",

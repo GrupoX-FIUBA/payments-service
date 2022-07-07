@@ -19,7 +19,8 @@ const getUserExtractionsData = require("./handlers/extractions/getUserExtraction
 
 const createDonation = require("./handlers/donations/createDonationHandler");
 const getDonationsData = require("./handlers/donations/getDonationsHandler");
-const getUserDonationsData = require("./handlers/donations/getUserDonationsHandler");
+const getUserDonationsSentData = require("./handlers/donations/getUserDonationsSentHandler");
+const getUserDonationsReceivedData = require("./handlers/donations/getUserDonationsReceivedHandler");
 
 const updateSubscriptions = require("./handlers/subscriptions/updateSubscriptionsHandler");
 const paySubscriptions = require("./handlers/subscriptions/paySubscriptionHandler");
@@ -172,12 +173,21 @@ function getDonationsDataRoute({ services, config }) {
   };
 }
 
-function getUserDonationsDataRoute({ services, config }) {
+function getUserDonationsSentDataRoute({ services, config }) {
   return {
     method: "GET",
-    url: "/donation/:user_id",
-    schema: getUserDonationsData.schema(config),
-    handler: getUserDonationsData.handler({ config, ...services }),
+    url: "/donation/sent/:user_id",
+    schema: getUserDonationsSentData.schema(config),
+    handler: getUserDonationsSentData.handler({ config, ...services }),
+  };
+}
+
+function getUserDonationsReceivedDataRoute({ services, config }) {
+  return {
+    method: "GET",
+    url: "/donation/received/:user_id",
+    schema: getUserDonationsReceivedData.schema(config),
+    handler: getUserDonationsReceivedData.handler({ config, ...services }),
   };
 }
 
@@ -243,7 +253,8 @@ module.exports = [
   getUserExtractionsDataRoute,
   createDonationRoute,
   getDonationsDataRoute,
-  getUserDonationsDataRoute,
+  getUserDonationsSentDataRoute,
+  getUserDonationsReceivedDataRoute,
   updateSubscriptionsRoute,
   paySubscriptionsRoute,
   getSubscriptionsPricesRoute,
