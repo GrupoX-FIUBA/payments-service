@@ -39,8 +39,8 @@ function handler({}) {
           limit: PAGE_SIZE,
         });
 
-        rows.forEach(payment => {
-            amountSum += payment.amount;
+        rows.forEach(deposit => {
+            amountSum += deposit.amount;
         });
 
         j++;
