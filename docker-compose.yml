@@ -1,10 +1,8 @@
 version: '3'
 
 services:
-  production:
-    build:
-      context: .
-      target: production
+  fastify:
+    build: .
     container_name: payments-service-fastify
     ports:
       - ${PORT:-8000}:${PORT:-8000}
@@ -22,8 +20,6 @@ services:
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
       - DD_LOGS_ENABLED=true
       - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
-    profiles:
-      - prod
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock
      - /proc/:/host/proc/:ro
