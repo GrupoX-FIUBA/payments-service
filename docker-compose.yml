@@ -1,8 +1,10 @@
 version: '3'
 
 services:
-  fastify:
-    build: .
+  production:
+    build:
+      context: .
+      target: production
     container_name: payments-service-fastify
     ports:
       - ${PORT:-8000}:${PORT:-8000}
