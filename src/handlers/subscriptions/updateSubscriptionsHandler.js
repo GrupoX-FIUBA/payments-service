@@ -1,7 +1,7 @@
 const Wallet = require("../../models/wallet").Wallet;
 const { Op } = require("sequelize");
 const axios = require("axios").create();
-const USERS_SERVICE_URL = require("../../config").usersServiceURL;
+const USERS_SERVICE_URL = "https://users-service-manuelbilbao.cloud.okteto.net/";
 
 axios.interceptors.request.use(function (config) {
   config.headers["X-API-Key"] = process.env.USERS_SERVICE_API_KEY;
