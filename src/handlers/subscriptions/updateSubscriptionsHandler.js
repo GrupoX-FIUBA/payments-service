@@ -1,14 +1,12 @@
 const Wallet = require("../../models/wallet").Wallet;
 const { Op } = require("sequelize");
 const axios = require("axios").create();
+const USERS_SERVICE_URL = require("../../config").usersServiceURL;
 
 axios.interceptors.request.use(function (config) {
   config.headers["X-API-Key"] = process.env.USERS_SERVICE_API_KEY;
   return config;
 });
-
-const USERS_SERVICE_URL_HEROKU = process.env.USERS_SERVICE_URL;
-const USERS_SERVICE_URL = USERS_SERVICE_URL_HEROKU;
 
 const USER_PREFIX = "user/";
 const PAGE_SIZE = 100;

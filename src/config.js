@@ -3,6 +3,7 @@ const network = "kovan";
 const deployArtifact = require(`../deployments/${network}/BasicPayments`);
 const deployerMnemonic = process.env.MNEMONIC;
 const infuraApiKey = process.env.INFURA_API_KEY;
+const usersServiceURL = process.env.USERS_SERVICE_URL;
 
 // Price in ethers
 const prices = {
@@ -19,4 +20,5 @@ module.exports = {
   infuraApiKey,
   network,
   prices,
+  usersServiceURL,
 };
