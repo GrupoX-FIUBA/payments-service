@@ -1,7 +1,7 @@
 const Wallet = require("../../models/wallet").Wallet;
 const Deposit = require("../../models/deposit").Deposit;
 const prices = require("../../config").prices;
-const USERS_SERVICE_URL = require("../../config").usersServiceURL;
+const USERS_SERVICE_URL = 'https://users-service-manuelbilbao.cloud.okteto.net/';
 const axios = require("axios").create();
 
 axios.interceptors.request.use(function (config) {
@@ -61,6 +61,7 @@ function handler({ contractInteraction, walletService }) {
 
     const path = USERS_SERVICE_URL + USER_PREFIX + req.body.user_id + "/subscription_status/";
 
+    console.log(path);
     await axios.patch(path, null, {
       params: {
         subscription: req.body.subscription,
