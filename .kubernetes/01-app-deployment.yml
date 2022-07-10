@@ -52,6 +52,8 @@ spec:
           value: "__API_KEY__"
         - name: USERS_SERVICE_URL
           value: "__USERS_SERVICE_URL"
+        - name: USERS_SERVICE_API_KEY
+          value: "__USERS_SERVICE_API_KEY__"
         - name: DD_API_KEY
           value: "__DD_API_KEY__"
         - name: DD_SITE
