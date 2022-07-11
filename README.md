@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/GrupoX-FIUBA/payments-service/branch/main/graph/badge.svg?token=O42JMBRSZ2)](https://codecov.io/gh/GrupoX-FIUBA/payments-service)
+
 # Payments Service
 
 This microservice manages the transactions and payments related topics.
